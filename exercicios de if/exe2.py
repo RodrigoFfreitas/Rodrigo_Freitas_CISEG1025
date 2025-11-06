@@ -25,4 +25,4 @@ elif num2 < num1 and num2 < num3:
 else:
     menor = num3
     
-print(f"Maior: {maior}\nMenor: {menor}")
+print(f"Maior: {maior}\nMenor: {menor} ")
