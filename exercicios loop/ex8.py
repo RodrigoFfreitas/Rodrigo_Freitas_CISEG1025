@@ -1,5 +1,11 @@
-for i in range (10,10001,10):
-    print(i)
+num1 = 10
+num2 = 15
+
+while num1 <= 1000:
+    print(num1)
+    num1 += 10
     
-for j in range (15, 996, 10):
-    print(j)
+    while num2 <= 995:
+        print(num2)
+        num2 += 10
+        break
