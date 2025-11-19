@@ -1,17 +1,3 @@
-""" nprimos=0
-num = 2
-i = 2
-
-while nprimos <= 10:
-    if num % i == 0:
-        print(f"{num} não é primo")
-        num =+ 1
-    else:
-        print(f"{num} é primo")
-        nprimos =+ 1
-        i =+ 1 """
-        
-        
 num = 3
 nprimo = 1
 list_primo = [2]
