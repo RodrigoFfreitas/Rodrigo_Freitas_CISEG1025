@@ -2,7 +2,7 @@ num=int(input("Insira um numero inteiro: "))
 i=1
 cont_opr = 0 
 
-while i <= num:
+while i < num:
     soma = num + i
     subt = num - i
     mult = num * i
