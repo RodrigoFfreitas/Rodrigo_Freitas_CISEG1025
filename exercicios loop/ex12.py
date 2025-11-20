@@ -1,7 +1,8 @@
 num=int(input("Insira um numero inteiro: "))
-i=(num-1)
+i=1
+cont_opr = 0 
 
-while i >= 1:
+while i <= num:
     soma = num + i
     subt = num - i
     mult = num * i
@@ -12,4 +13,8 @@ while i >= 1:
     print(f"{num} x {i} = {mult}")
     print(f"{num} / {i} = {divi}")
     
-    i -= 1
+    cont_opr += 4
+    
+    i += 1
+
+print(f"O total de operações efetuadas foi de: {cont_opr}")
