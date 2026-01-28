@@ -118,7 +118,7 @@ while True:
             excluirLivros()
             
         case "4":
-         ordenarLivros()
+            ordenarLivros()
             
         case "5":
             print("A listar todos os Livros cadastrados: ")
