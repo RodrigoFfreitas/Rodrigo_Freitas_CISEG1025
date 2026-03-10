@@ -4,62 +4,62 @@ import threading
 HOST = '127.0.0.1'
 PORT = 5555
 
-clientes = []
+clients = []
 
 # Criar socket
-servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-servidor.bind((HOST, PORT))
-servidor.listen()
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind((HOST, PORT))
+server.listen()
 
-print(f"🟢 Servidor à escuta em {HOST}:{PORT}...")
+print(f"Servidor à procura em: {HOST}:{PORT}")
 
 
-def enviar_para_todos(mensagem, cliente_origem):
-    for cliente in clientes:
-        if cliente != cliente_origem:
+def Broadcast(message, clientIncome):
+    for client in clients:
+        if client != clientIncome:
             try:
-                cliente.send(mensagem)
+                client.send(message)
             except:
-                cliente.close()
-                clientes.remove(cliente)
+                client.close()
+                clients.remove(client)
 
 
-def lidar_com_cliente(cliente_socket, endereco):
+def dealWithClient(clienteSocket, ipAddress):
 
-    print(f"🔵 Cliente conectado: {endereco}")
+    print(f"Cliente conectado: {ipAddress}")
 
-    clientes.append(cliente_socket)
+    clients.append(clienteSocket)
 
     while True:
         try:
 
-            mensagem_bytes = cliente_socket.recv(1024)
+            messageBytes = clienteSocket.recv(1024)
 
-            if not mensagem_bytes:
+            if not messageBytes:
                 break
 
-            mensagem = mensagem_bytes.decode('utf-8')
+            message = messageBytes.decode('utf-8')
 
-            print(f"📩 {endereco}: {mensagem}")
+            print(f"📩 {ipAddress}: {message}")
 
-            enviar_para_todos(mensagem_bytes, cliente_socket)
+            Broadcast(messageBytes, clienteSocket)
 
         except:
             break
 
-    print(f"🔴 Cliente saiu: {endereco}")
+    print(f"Cliente saiu: {ipAddress}")
 
-    clientes.remove(cliente_socket)
-    cliente_socket.close()
+    clients.remove(clienteSocket)
+    clienteSocket.close()
 
 
 while True:
 
-    cliente_socket, endereco = servidor.accept()
+    clientSocket, ipAddress = server.accept()
 
     thread = threading.Thread(
-        target=lidar_com_cliente,
-        args=(cliente_socket, endereco)
+        target=dealWithClient,
+        args=(clientSocket, ipAddress)
     )
 
     thread.start()

@@ -4,44 +4,44 @@ import threading
 HOST = '127.0.0.1'
 PORT = 5555
 
-cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-print(f"🟡 A conectar a {HOST}:{PORT}...")
-cliente.connect((HOST, PORT))
+print(f"A conectar a {HOST}:{PORT}...")
+client.connect((HOST, PORT))
 
-print("🟢 Conectado ao servidor! (digita 'sair' para encerrar)")
+print("Conectado ao servidor! ( Para sair escreva 'sair')")
 
 
-def receber_mensagens():
+def ReceberMensagens():
 
     while True:
 
         try:
-            mensagem = cliente.recv(1024).decode('utf-8')
+            message = client.recv(1024).decode('utf-8')
 
-            if not mensagem:
+            if not message:
                 break
 
-            print(f"\n💬 {mensagem}")
+            print(f"\n💬 {message}")
 
         except:
-            print("🔴 Conexão perdida.")
+            print("🔴 Conexão perdida!!")
             break
 
 
-thread_receber = threading.Thread(target=receber_mensagens)
-thread_receber.start()
+reciveThread = threading.Thread(target=ReceberMensagens)
+reciveThread.start()
 
 
 while True:
 
-    mensagem = input("Tu: ")
+    message = input()
 
-    if mensagem.lower() == "sair":
+    if message.lower() == "sair":
         break
 
-    cliente.send(mensagem.encode('utf-8'))
+    client.send(message.encode('utf-8'))
 
 
-cliente.close()
-print("🔴 Cliente encerrado.")
+client.close()
+print("A Fechar o Cliente!")
